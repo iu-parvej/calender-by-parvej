@@ -80,17 +80,14 @@ export default function App() {
   // Effect to save the theme preference to local storage whenever it changes
   useEffect(() => {
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    // Apply the 'dark' class to the html element based on state
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    // The adding/removing of 'dark' class is now handled by the main div's className
   }, [isDarkMode]);
 
+// Inside the App function
   return (
     <FirebaseProvider>
-      <div className={`h-screen w-screen font-sans antialiased transition-colors duration-300 ${isDarkMode ? 'dark bg-gray-950 text-white' : 'bg-gray-100 text-gray-900'}`}>
+      {/* Apply 'dark' class directly to the main container based on state */}
+      <div className={`h-screen w-screen font-sans antialiased transition-colors duration-300 ${isDarkMode ? 'dark' : ''}`}>
         <CalendarAppContent isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       </div>
     </FirebaseProvider>
